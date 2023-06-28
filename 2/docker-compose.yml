@@ -1,0 +1,18 @@
+version: '1'
+services:
+  dataBase:
+    image: postgres:latest
+    build: ./dataBase/
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: lapis
+      POSTGRES_PASSWORD: QWErty777
+      POSTGRES_DB: lapisdb
+    volumes:
+      - ./dataBase/init_scripts/init.sql:/docker-entrypoint/initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "lapis", "-W", "QWErty777"]
+      interval: 5s
+      retries: 5
+    restart: always
