@@ -8,15 +8,15 @@ CREATE TABLE IF NOT EXISTS public.publisher(
 /*Автор*/
 CREATE TABLE IF NOT EXISTS public.author(
     author_id SERIAL PRIMARY KEY,                               /*Код автора*/
-    surname VARCHAR(50) NOT NULL,                               /*Фамилия*/
-    name VARCHAR(50) NOT NULL,                                  /*Имя*/
-    patronymic VARCHAR(50),                                     /*Отчество*/
+    a_surname VARCHAR(50) NOT NULL,                               /*Фамилия*/
+    a_name VARCHAR(50) NOT NULL,                                  /*Имя*/
+    a_patronymic VARCHAR(50),                                     /*Отчество*/
     publisher_id SERIAL REFERENCES publisher (publisher_id)     /*Код издательства*/
 );
 
 /*Авторы книги*/
 CREATE TABLE IF NOT EXISTS public.authors_book(
-    authors_id SERIAL PRIMARY KEY,                      /*Код группы авторов*/
+    authors_id INT,                                     /*Код группы авторов*/
     author_id SERIAL REFERENCES author (author_id)      /*Код автора*/
 );
 
@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS public.authors_book(
 CREATE TABLE IF NOT EXISTS public.book(
     book_id SERIAL PRIMARY KEY,                             /*Шифр книги*/
     name VARCHAR(50) NOT NULL,                              /*Название*/
-    publisher VARCHAR(50) NOT NULL,                         /*Издательство*/
-    author SERIAL REFERENCES authors_book (authors_id),     /*Авторы книги из authors_book*/
+    publisher SERIAL REFERENCES publisher (publisher_id),   /*Издательство*/
+    author INT,                                             /*Авторы книги из authors_book*/
     date_instances DATE NOT NULL,                           /*Год издательства*/
     volume_page SMALLINT NOT NULL,                          /*Количество страниц*/
     cost DECIMAL NOT NULL,                                  /*Стоимость*/
@@ -35,9 +35,9 @@ CREATE TABLE IF NOT EXISTS public.book(
 /*Сотрудник*/
 CREATE TABLE IF NOT EXISTS public.employee(
     employee_id SERIAL PRIMARY KEY,                     /*Код сотрудника*/
-    surname VARCHAR(50) NOT NULL,                       /*Фамилия*/
-    name VARCHAR(50) NOT NULL,                          /*Имя*/
-    patronymic VARCHAR(50),                             /*Отчество*/
+    e_surname VARCHAR(50) NOT NULL,                       /*Фамилия*/
+    e_name VARCHAR(50) NOT NULL,                          /*Имя*/
+    e_patronymic VARCHAR(50),                             /*Отчество*/
     job_position VARCHAR(50) NOT NULL,                  /*Должность*/
     adress TEXT NOT NULL,                               /*Адрес*/
     phone_number VARCHAR(50) NOT NULL                   /*Телефон*/
@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS public.employee(
 /*Читатель*/
 CREATE TABLE IF NOT EXISTS public.reader(
     reader_ticket_number SERIAL PRIMARY KEY,                        /*Номер читательского билета*/
-    surname VARCHAR(50) NOT NULL,                                   /*Фамилия*/
-    name VARCHAR(50) NOT NULL,                                      /*Имя*/
-    patronymic VARCHAR(50),                                         /*Отчество*/
+    r_surname VARCHAR(50) NOT NULL,                                   /*Фамилия*/
+    r_name VARCHAR(50) NOT NULL,                                      /*Имя*/
+    r_patronymic VARCHAR(50),                                         /*Отчество*/
     adress TEXT NOT NULL,                                           /*Адрес*/
     phone_number VARCHAR(50) NOT NULL                               /*Телефон*/
 );
