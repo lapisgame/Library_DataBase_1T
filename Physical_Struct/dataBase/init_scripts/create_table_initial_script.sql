@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS public.author(
     author_id SERIAL PRIMARY KEY,                               /*Код автора*/
     surname VARCHAR(50) NOT NULL,                               /*Фамилия*/
     name VARCHAR(50) NOT NULL,                                  /*Имя*/
-    patronymic VARCHAR(50) NOT NULL,                            /*Отчество*/
+    patronymic VARCHAR(50),                                     /*Отчество*/
     publisher_id SERIAL REFERENCES publisher (publisher_id)     /*Код издательства*/
 );
 
@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS public.employee(
     employee_id SERIAL PRIMARY KEY,                     /*Код сотрудника*/
     surname VARCHAR(50) NOT NULL,                       /*Фамилия*/
     name VARCHAR(50) NOT NULL,                          /*Имя*/
-    patronymic VARCHAR(50) NOT NULL,                    /*Отчество*/
+    patronymic VARCHAR(50),                             /*Отчество*/
     job_position VARCHAR(50) NOT NULL,                  /*Должность*/
-    adress VARCHAR(50) NOT NULL,                        /*Адрес*/
+    adress TEXT NOT NULL,                               /*Адрес*/
     phone_number VARCHAR(50) NOT NULL                   /*Телефон*/
 );
 
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS public.reader(
     reader_ticket_number SERIAL PRIMARY KEY,                        /*Номер читательского билета*/
     surname VARCHAR(50) NOT NULL,                                   /*Фамилия*/
     name VARCHAR(50) NOT NULL,                                      /*Имя*/
-    patronymic VARCHAR(50) NOT NULL,                                /*Отчество*/
-    adress VARCHAR(50) NOT NULL,                                    /*Адрес*/
+    patronymic VARCHAR(50),                                         /*Отчество*/
+    adress TEXT NOT NULL,                                           /*Адрес*/
     phone_number VARCHAR(50) NOT NULL                               /*Телефон*/
 );
 
