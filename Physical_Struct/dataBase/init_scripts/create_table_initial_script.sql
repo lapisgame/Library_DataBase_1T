@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS public.extradition(
     book_id SERIAL REFERENCES book (book_id),                               /*Шифр книги*/
     reader_ticket_number SERIAL REFERENCES reader (reader_ticket_number),   /*Номер читательского билета*/
     date_of_issue DATE NOT NULL,                                            /*Дата выдачи*/
-    return_date DATE NOT NULL,                                              /*Дата возврата*/
+    return_date DATE,                                                       /*Дата возврата*/
     real_return_date DATE,                                                  /*Фактическая дата возврата*/
     employee_id SERIAL REFERENCES employee (employee_id)                    /*Код сотрудника*/
 );
