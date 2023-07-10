@@ -11,7 +11,7 @@ SELECT
 FROM public.extradition e 
 JOIN public.reader r on e.reader_ticket_number = r.reader_ticket_number
 GROUP BY r.reader_ticket_number 
-ORDER BY r.reader_ticket_number DESC 
+ORDER BY Колво_прочитанных_книг DESC 
 
 /*Определить, сколько книг у читателей на руках на текущую дату.*/
 SELECT 
@@ -59,18 +59,25 @@ FROM extradition e
 /*Книги какого издательства были самыми востребованными у читателей? Отсортируйте издательства по убыванию востребованности книг.*/
 SELECT 
 	b.publisher AS Код_издательства, 
+	p.title AS Название_издательства,
 	COUNT(*) as Количество_книг
 FROM extradition e
-JOIN book b ON e.book_id = b.book_id  
-GROUP BY publisher
+JOIN book b ON e.book_id = b.book_id
+JOIN publisher p ON b.publisher = p.publisher_id
+GROUP BY publisher, p.title
 ORDER BY Количество_книг DESC
 
 /*Определить самого издаваемого автора.*/
 SELECT 
-	author, 
+	author AS Код_автора,
+	a.a_surname AS Фамилия_автора,
+	a.a_name AS Имя_автора,
+	a.a_patronymic AS Отчество_автора,
 	COUNT(*) as Книги_автора
-FROM book
-GROUP BY author
+FROM book b
+JOIN authors_book ab ON ab.authors_id = b.author 
+JOIN author a ON ab.author_id = a.author_id 
+GROUP BY author, a.a_surname, a.a_name, a.a_patronymic
 ORDER BY Книги_автора DESC
 LIMIT 1
 
