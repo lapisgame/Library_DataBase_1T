@@ -71,5 +71,6 @@ CREATE TABLE IF NOT EXISTS public.damage_loss(
     book_id SERIAL REFERENCES book (book_id),                               /*Шифр книги*/
     type_or_reason TEXT NOT NULL,                                           /*Вид ущерба или причина утери*/
     cost DECIMAL NOT NULL,                                                  /*Стоимость ущерба*/
-    employee_id SERIAL REFERENCES employee (employee_id)                    /*Код сотрудника*/
+    employee_id SERIAL REFERENCES employee (employee_id),                   /*Код сотрудника*/
+    return_date DATE NOT NULL
 );
