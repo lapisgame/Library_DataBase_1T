@@ -16,8 +16,8 @@ SET quantity = quantity-1
 WHERE book_id = 1
 
 /*Определить сумму потерянных книг по каждому кварталу в течение года.*/
-SELECT SUM(CASE WHEN (return_date>='2023-01-01' AND return_date <='2023-03-31') THEN COST ELSE 0 END) AS Квартал_1,
-	   SUM(CASE WHEN (return_date>='2023-04-01' AND return_date <='2023-06-30') THEN COST ELSE 0 END) AS Квартал_2,
-	   SUM(CASE WHEN (return_date>='2023-07-01' AND return_date <='2023-09-30') THEN COST ELSE 0 END) AS Квартал_3,
-	   SUM(CASE WHEN (return_date>='2023-10-01' AND return_date <='2023-12-31') THEN COST ELSE 0 END) AS Квартал_4
+SELECT SUM(CASE WHEN (return_date>='2023-01-01' AND return_date <='2023-03-31' AND type_or_reason = 'Утеря') THEN COST ELSE 0 END) AS Квартал_1,
+	   SUM(CASE WHEN (return_date>='2023-04-01' AND return_date <='2023-06-30' AND type_or_reason = 'Утеря') THEN COST ELSE 0 END) AS Квартал_2,
+	   SUM(CASE WHEN (return_date>='2023-07-01' AND return_date <='2023-09-30' AND type_or_reason = 'Утеря') THEN COST ELSE 0 END) AS Квартал_3,
+	   SUM(CASE WHEN (return_date>='2023-10-01' AND return_date <='2023-12-31' AND type_or_reason = 'Утеря') THEN COST ELSE 0 END) AS Квартал_4
 FROM damage_loss
